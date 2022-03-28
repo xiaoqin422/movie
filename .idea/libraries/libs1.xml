@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="libs1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/libs/fastjson-1.2.45.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/libs/jstl-impl.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/libs/javax.servlet.jsp.jstl.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/libs/mysql-connector-java-8.0.19.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-fileupload-1.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-io-2.6.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

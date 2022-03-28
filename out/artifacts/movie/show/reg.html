@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <base href="/"/>
+    <title>注册</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="lib/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="show/style/admin.css" media="all">
+    <link rel="stylesheet" href="show/style/login.css" media="all">
+</head>
+<body>
+<div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="display: none;">
+    <div class="layadmin-user-login-main">
+        <div class="layadmin-user-login-box layadmin-user-login-header">
+            <h2>用户注册</h2>
+        </div>
+        <div class="layadmin-user-login-box layadmin-user-login-body layui-form">
+            <div class="layui-form-item">
+                <label class="layadmin-user-login-icon layui-icon layui-icon-username" for="user_name"></label>
+                <input type="text" name="user_name" id="user_name" lay-verify="required|nikename" placeholder="用户名"
+                       class="layui-input">
+                <input type="hidden" name="user_headimg" value="images/User/img.png">
+                <input type="hidden" name="user_role" value="0">
+                <input type="hidden" name="user_state" value="1">
+            </div>
+            <div class="layui-form-item">
+                <label class="layadmin-user-login-icon layui-icon layui-icon-cellphone" for="user_tel"></label>
+                <input type="text" name="user_tel" id="user_tel" lay-verify="required|phone" placeholder="手机"
+                       class="layui-input">
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-row">
+                    <label class="layadmin-user-login-icon layui-icon layui-icon-vercode" for="user_email"></label>
+                    <input type="text" name="user_email" id="user_email" lay-verify="required|email" placeholder="邮箱"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layadmin-user-login-icon layui-icon layui-icon-password" for="user_pwd"></label>
+                <input type="password" name="user_pwd" id="user_pwd" lay-verify="required|pass" placeholder="密码"
+                       class="layui-input">
+            </div>
+            <div class="layui-form-item">
+                <label class="layadmin-user-login-icon layui-icon layui-icon-password" for="user_rpwd"></label>
+                <input type="password" name="repass" id="user_rpwd" lay-verify="required|repass" placeholder="确认密码"
+                       class="layui-input">
+            </div>
+
+            <div class="layui-form-item">
+                <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="LAY-user-reg-submit">注 册</button>
+            </div>
+            <div class="layui-trans layui-form-item layadmin-user-login-other">
+                <label>社交账号注册</label>
+                <a href="javascript:;"><i class="layui-icon layui-icon-login-qq"></i></a>
+                <a href="javascript:;"><i class="layui-icon layui-icon-login-wechat"></i></a>
+                <a href="javascript:;"><i class="layui-icon layui-icon-login-weibo"></i></a>
+
+                <a href="show/login.html" class="layadmin-user-jump-change layadmin-link layui-hide-xs">用已有帐号登入</a>
+                <a href="show/login.html"
+                   class="layadmin-user-jump-change layadmin-link layui-hide-sm layui-show-xs-inline-block">登入</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../lib/layui/layui.js"></script>
+<script type="text/javascript">
+    layui.use(['form', 'layer'], function () {
+        var form = layui.form,
+            layer = layui.layer;
+        $ = layui.jquery;
+        //自定义验证规则
+        form.verify({
+            nikename: function (value) {
+                if (value.length < 5) {
+                    return '昵称至少得5个字符啊';
+                }
+            },
+            pass: [/(.+){6,12}$/, '密码必须6到12位'],
+            repass: function (value) {
+                if ($('#user_pwd').val() != $('#user_rpwd').val()) {
+                    return '两次密码不一致';
+                }
+            }
+        })
+        form.on('submit(LAY-user-reg-submit)', function (data) {
+            $.ajax({
+                url: '../user',
+                type: 'post',
+                beforeSend: function () { //当一个Ajax请求开始时触发
+                    layer.load(0, {time: 3 * 1000}); //打开layui加载效果
+                },
+                data: {
+                    "method": "add",
+                    "form": JSON.stringify(data.field),
+                },
+                dataType: 'JSON', //提交的数据格式为JSON,返回的数据格式也是json
+                success: function (data) {
+                    layer.close(layer.index);
+                    if(data.code==0){
+                        layer.msg(data.msg,function(){
+                            // location.href='index.html'
+                        });
+                    }else{
+                        layer.close();
+                        form.render();
+                        window.location.href="login.html";
+                    }
+                },
+                error: function (data) {
+                    layer.close(layer.index);
+                    alert("服务器超时,请联系管理员！");
+                }
+
+            })
+            return false;
+        });
+    })
+</script>
+</body>
+</html>

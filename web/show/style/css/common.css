@@ -1,0 +1,130 @@
+body,html{
+	background:#33353b;
+	padding:0;
+	margin:0;
+}
+a{
+	text-decoration: none;
+  -webkit-tap-highlight-color:rgba(255,0,0,0);
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #999; opacity:1; 
+}
+
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #999;opacity:1;
+}
+
+input:-ms-input-placeholder{
+    color: #999;opacity:1;
+}
+
+input::-webkit-input-placeholder{
+    color: #999;opacity:1;
+}
+.coach-ico{
+	background:url(../img/chooseseat_coach@3x.png) no-repeat;
+	width:60px;
+	height:39px;
+	background-size:60px;
+	margin:0 auto;
+	font-size:15px;
+	color:#fff;
+	line-height:56px;
+	text-align:center;
+	margin-bottom:10px;
+}
+
+#close-btn{
+	background:url(../img/4D66FA87A5B4BDEC750F9AD3356E024B.png) no-repeat center 10px;
+	background-size:15px;
+}
+.seat-linebox{
+	width:100%;
+	height:35px;
+}
+.seat-numbox{
+	width:6%;
+	height:35px;
+	float:left;
+	text-align:center;
+	line-height:35px;
+	color:#fff;
+	background:#666;
+	margin-right:3%;
+}
+.seat-zico{
+	width:10%;
+	height:35px;
+	float:left;
+	background:url(../img/chooseseat_empty@3x.png) no-repeat;
+	background-size:20px;
+	background-position:center center;
+}
+.seat-zico.cur{
+	width:10%;
+	height:35px;
+	float:left;
+	background:url(../img/chooseseat_chosen_seat@3x.png) no-repeat;
+	background-size:20px;
+	background-position:center center;
+}
+.seat-zico.yxcur{
+	width:10%;
+	height:35px;
+	float:left;
+	background:url(../img/chooseseat_chosen_seat@3x.png) no-repeat;
+	background-size:20px;
+	background-position:center center;
+}
+.seat-zico.yzcur{
+	width:10%;
+	height:35px;
+	float:left;
+	background:url(../img/chooseseat_occupied_seat@3x.png) no-repeat;
+	background-size:20px;
+	background-position:center center;
+}
+.seat-state-box{
+	width:100%;
+	background:#000;
+	margin-top:5px;
+	padding:10px;
+	box-sizing:border-box;
+}
+
+.kx-ste,.yx-ste,.yz-ste{
+	font-size:12px;
+	color:#fff;
+	height:20px;
+	line-height:20px;
+	padding-left:30px;
+	margin-right:15px;
+}
+.kx-ste{
+	background:url(../img/chooseseat_empty@3x.png) no-repeat;
+	background-size:20px;
+	
+}
+.yx-ste{
+	background:url(../img/chooseseat_chosen_seat@3x.png) no-repeat;
+	background-size:20px;
+}
+.yz-ste{
+	background:url(../img/chooseseat_occupied_seat@3x.png) no-repeat;
+	background-size:20px;
+}
+.pay-btn{
+	width:100%;
+	height:44px;
+	line-height:44px;
+	text-align:center;
+	background:#ff5000;
+	position:fixed;
+	display:block;
+	color:#fff;
+	bottom:0px;
+	left:0px;
+	font-size:16px;
+	z-index:2000;
+}

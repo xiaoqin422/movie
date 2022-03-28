@@ -1,0 +1,186 @@
+.x-file {
+    margin-bottom: -10px;
+}
+
+.x-file-upload {
+    vertical-align: top;
+}
+
+.x-file-block {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    vertical-align: middle;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    display: inline-block;
+    border: 1px solid #f1f1f1;
+}
+
+.x-file-block:hover .x-file-opers {
+    display: block;
+}
+
+.x-file-block .x-file-icon {
+    height: 100px;
+}
+
+.x-file-oper {
+    position: absolute;
+    top: 0;
+}
+
+.x-file-opers {
+    display: none;
+    position: absolute;
+    width: 100px;
+    height: 20px;
+    text-align: center;
+    background: #3c3c3cb8;
+    line-height: 20px;
+    text-align: center;
+    /* display: flex; */
+    /* display: -webkit-flex; */
+    /* justify-content: space-between; */
+    /* align-items: center; */
+    top: 0px;
+}
+
+.x-file-opers i {
+    font-size: 18px;
+    cursor: pointer;
+    color: #a9fdf5;
+    display: inline-block;
+    width: 19px;
+    position: relative;
+}
+
+.x-file-opers i:hover {
+    color: #ffffff;
+}
+
+.x-file-opers .x-file-oper-edit,
+.x-file-opers .x-file-oper-download,
+.x-file-opers .x-file-oper-view {
+    display: none;
+}
+
+.x-file-progress {
+    top: unset;
+    bottom: 16px;
+    width: 100px;
+    height: 16px;
+    box-sizing: border-box;
+    background: #ffffff99;
+}
+
+.x-file-progress .x-file-progress-bar {
+    height: 16px;
+    background: #009688;
+}
+
+.x-file-progress .x-file-progress-info {
+    text-align: center;
+    color: white;
+    height: 16px;
+    line-height: 16px;
+    font-size: 12px;
+    bottom: 0;
+    width: 100px;
+    position: absolute;
+}
+
+
+.x-file-info {
+    position: absolute;
+    bottom: 0;
+    background: #00000054;
+    color: white;
+}
+
+.x-file-block:hover .x-file-info {
+    /*display: none;*/
+}
+
+.x-file-info .x-file-name {
+    display: block;
+    text-align: center;
+    max-height: 100px;
+    overflow: hidden;
+    width: 100px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: 16px;
+    line-height: 16px;
+    font-size: 12px;
+}
+
+
+.x-file-block .x-file-preview {
+    max-width: 100px;
+    max-height: 100px;
+    display: block;
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.x-file-cropper {
+    width: 720px;
+    height: 500px;
+}
+
+.x-file-cropper-img-container {
+    width: 500px;
+    height: 500px;
+    display: inline-block;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+}
+
+.x-file-cropper-img {
+    width: 500px;
+    height: 500px;
+}
+
+.x-file-cropper-preview-img-square,
+.x-file-cropper-preview-img-circle {
+    width: 180px;
+    height: 180px;
+    display: inline-block;
+    border: 1px solid #f1f1f1;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    overflow: hidden;
+}
+
+.x-file-cropper-preview-img-square {
+    top: 220px;
+}
+
+.x-file-cropper-preview-img-circle {
+    border-radius: 180px;
+}
+
+.x-file-crop-btn {
+    bottom: 20px;
+    right: 20px;
+    width: 180px;
+    position: absolute;
+}
+
+.x-file-cropper .x-file-preview-img {
+    max-width: 100%;
+    max-height: 100%;
+    top: 0;
+    position: absolute;
+    bottom: 0;
+    margin: auto;
+    left: 0;
+    right: 0;
+}

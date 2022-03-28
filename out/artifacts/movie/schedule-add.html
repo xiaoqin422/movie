@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>
+        场次添加
+    </title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="stylesheet" href="./css/font.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <script src="./lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="./js/index.js"></script>
+</head>
+<body>
+
+<div class="layui-card">
+    <form class="layui-form layui-form-pane" id="add">
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <div class="layui-form-item" id="update_1">
+                    <label class="layui-form-label">
+                        <span class='x-red'>*</span>电影名
+                    </label>
+                    <div class="layui-input-inline">
+                        <div id="movie_name" class="layui-input-inline" lay-filter="movie_name">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item" id="update_2">
+                    <label class="layui-form-label">
+                        <span class='x-red'>*</span>电影院
+                    </label>
+                    <div class="layui-input-inline">
+                        <div  id="cinema_id"  class="layui-input-inline" lay-filter="cinema_id"></div>
+                        <input type="hidden" id="cinema" name="cinema_id">
+                    </div>
+
+                    <label class="layui-form-label">
+                        <span class='x-red'>*</span>放映厅
+                    </label>
+                    <div class="layui-input-inline">
+                        <div id="hall_id"  lay-filter="hall_id" class="layui-input-inline" disabled></div>
+                        <input type="hidden" id="hall" name="hall_id">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <span class='x-red'>*</span>票价
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="schedule_price" name="schedule_price" lay-verify="required|number_user" id="movie_boxOffice"
+                               placeholder="输入数字" autocomplete="off" value="" class="layui-input">
+                        <input type="hidden" id="movie" name="movie_id">
+                        <input type="hidden" id="schedule_id" name="schedule_id">
+                        <input type="hidden" id="type_m" name="type_m" value="add">
+                    </div>
+                    <label class="layui-form-label">
+                        <span class='x-red'>*</span>票数
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="schedule_remain" name="schedule_remain" placeholder="输入数字" id="movie_commentCount"
+                               lay-verify="required|number_user" autocomplete="off" value="" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <span class='x-red'>*</span>状态
+                    </label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="schedule_state" value="1" title="正常开播" checked="">
+                        <input type="radio" name="schedule_state" value="0" title="异常下架">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label for="movie_releaseDate" class="layui-form-label">
+                        <span class="x-red">*</span>上映日期</label>
+                    <div class="layui-input-inline">
+                        <input class="layui-input" placeholder="上映日期" name="schedule_startTime" lay-verify="required"
+                               id="movie_releaseDate"></div>
+                </div>
+                <div class="layui-form-item">
+                    <input class="layui-btn" type="button" id="submit" lay-filter="add" lay-submit="" value="添加">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="lib/layui/layui.js" type="text/javascript"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述 JS 路径需要改成你本地的 -->
+<script>
+    layui.config({
+        base: 'lib/layui/lay/modules/' //layui自定义layui组件目录
+    }).use(['laydate', 'form', 'selectPlus'],
+        function () {
+            $ = layui.jquery;
+            var form = layui.form;
+            var selectPlus = layui.selectPlus;
+            var laydate = layui.laydate;
+            //日期
+            laydate.render({
+                elem: '#movie_releaseDate'
+            });
+
+            //自定义验证规则
+            form.verify({
+                number_user: [/^(\-|\+)?\d+(\.\d+)?/, '格式为非负小数，且不能出现空格']
+            });
+            selectPlus.render({
+                el: '#cinema_id',
+                type: "radio",
+                valueName: "cinema_name",
+                label: ["cinema_id", "cinema_address"],
+                values: '---请先选择影院---',
+                url: "Cinema",
+                method: "post",
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',//ajax表单请求头
+                where: {
+                    "method": "selected",
+                }
+            });
+            selectPlus.render({
+                el: '#movie_name',
+                type: "radio",
+                valueName: "movie_cn_name",
+                label: ["movie_id", "movie_cn_name"],
+                values: '---请选放映电影---',
+                url: "Movie",
+                method: "post",
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',//ajax表单请求头
+                where: {
+                    "method": "selected",
+                }
+            });
+
+            selectPlus.on('selectPlus(movie_name)', function (obj) {
+                console.log(obj.checkedData.movie_id);
+                $("#movie").val(obj.checkedData.movie_id);
+            });
+            selectPlus.on('selectPlus(cinema_id)', function (obj) {
+                $("#cinema").val(obj.checkedData.cinema_id)
+                $("#hall_id").attr("disabled", false);
+                selectPlus.render({
+                    el: '#hall_id',
+                    type: "radio",
+                    valueName: "hall_name",
+                    label: ["hall_name", "hall_capacity"],
+                    values: '---请选放映影厅---',
+                    url: "Hall",
+                    method: "post",
+                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',//ajax表单请求头
+                    where: {
+                        "method": "selected",
+                        "cinema_id": obj.checkedData.cinema_id
+                    }
+                });
+                selectPlus.on('selectPlus(hall_id)', function (obj) {
+                    $("#hall").val(obj.checkedData.hall_id)
+                });
+            });
+
+            //监听提交
+            form.on('submit(add)', function (data) {
+                $.ajax({
+                    url: 'Schedule',
+                    type: 'post',
+                    beforeSend: function () { //当一个Ajax请求开始时触发
+                        layer.load(0, {time: 3 * 1000}); //打开layui加载效果
+                    },
+                    data: {
+                        "method": data.field.type_m,
+                        "form": JSON.stringify(data.field),
+                    },
+                    dataType: 'JSON', //提交的数据格式为JSON,返回的数据格式也是json
+                    success: function (data) {
+                        layer.close(layer.index);
+                        if (data.code == 1) {
+                            layer.alert(data.msg, {
+                                    icon: 6
+                                },
+                                function () {
+                                    //关闭当前frame
+                                    xadmin.close();
+                                    // 可以对父窗口进行刷新
+                                    xadmin.father_reload();
+                                });
+                        } else {
+                            layer.msg(data.msg, function () {
+                            });
+                        }
+                    },
+                    error: function (data) {
+                        layer.close(layer.index);
+                        alert("服务器超时,请联系管理员！");
+                    }
+
+                })
+                return false;
+            });
+        });
+</script>
+</body>
+</html>
